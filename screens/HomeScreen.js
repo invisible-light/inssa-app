@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet} from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import styled from 'styled-components/native';
 
 const styles = StyleSheet.create({
@@ -35,11 +35,12 @@ export default class HomeScreen extends Component {
       <Container>
         <MapView
           style={styles.map}
+          provider={PROVIDER_GOOGLE}
           initialRegion={{
-            latitude: 37.1987312,
-            longitude: 127.1084342,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
+            latitude: 37.3419526,
+            longitude: 126.8293454,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005,
           }}
         />
       </Container>
