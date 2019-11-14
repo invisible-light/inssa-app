@@ -48,7 +48,7 @@ function Header() {
   );
 }
 
-function Content() {
+function Content({walk}) {
   const Container = styled.View`
     position: relative;
     height: 295;
@@ -85,15 +85,18 @@ function Content() {
     color: ${colors.gray[8]};
   `;
 
+  const illustSource = walk
+    ? require('../assets/illusts/running.png')
+    : require('../assets/illusts/stopped.png');
+  const stateText = `지금은 ${walk ? '초록' : '빨간'} 불!`;
+  const fieldText = walk ? '보행할 수 있는 시간' : '보행 가능 시간까지';
+
   return (
     <Container>
-      <Illust
-        resizeMode={'contain'}
-        source={require('../assets/illusts/stopped.png')}
-      />
+      <Illust resizeMode={'contain'} source={illustSource} />
       <Info>
-        <State>지금은 빨간 불!</State>
-        <Field>보행 가능 시간까지</Field>
+        <State>{stateText}</State>
+        <Field>{fieldText}</Field>
         <Clock>01:30</Clock>
       </Info>
     </Container>
@@ -120,7 +123,7 @@ export default function Card() {
   return (
     <Container>
       <Header />
-      <Content />
+      <Content walk={false} />
     </Container>
   );
 }

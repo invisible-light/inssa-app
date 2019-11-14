@@ -65,7 +65,7 @@ export default class HomeScreen extends Component {
           style={styles.map}
           provider={PROVIDER_GOOGLE}
           initialRegion={{
-            latitude: 37.3419526,
+            latitude: 37.3395526,
             longitude: 126.8293454,
             latitudeDelta: 0.005,
             longitudeDelta: 0.005,
