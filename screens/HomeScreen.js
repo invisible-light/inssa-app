@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import styled from 'styled-components/native';
 
+import BottomCard from '../components/BottomCard';
 import CustomMarker from '../components/CustomMarker';
 
 const styles = StyleSheet.create({
@@ -75,6 +76,7 @@ export default class HomeScreen extends Component {
             </Marker>
           ))}
         </MapView>
+        <BottomCard />
       </Container>
     );
   }
