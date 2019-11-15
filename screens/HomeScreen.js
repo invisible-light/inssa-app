@@ -58,6 +58,14 @@ export default class HomeScreen extends Component {
             longitude: 126.8277398,
           },
         },
+        {
+          type: 'bus',
+          selected: false,
+          coordinate: {
+            latitude: 37.339812,
+            longitude: 126.8293598,
+          },
+        },
       ],
     };
   }
