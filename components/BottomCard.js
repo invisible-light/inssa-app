@@ -1,9 +1,10 @@
 import React from 'react';
-import {Dimensions, TouchableHighlight} from 'react-native';
+import {Dimensions} from 'react-native';
 import styled from 'styled-components';
 
 import colors from '../utils/colors.json';
 import padStart from '../utils/padStart';
+import useConstant from '../utils/useConstant';
 
 const window = Dimensions.get('window');
 
@@ -19,27 +20,37 @@ function Header({onPress, closed}) {
       border-bottom-width: 1px;
       border-bottom-color: ${colors.gray[2]};`}
   `;
-  const Image = styled.Image`
-    height: 80;
-    width: 80;
-    background-color: #f3f3f3;
-  `;
-  const Info = styled.View`
-    display: flex;
-  `;
-  const Title = styled.Text`
-    font-size: 28;
-    font-weight: 800;
-    color: ${colors.gray[9]};
-  `;
-  const Address = styled.Text`
-    font-size: 15;
-    color: ${colors.gray[6]};
-  `;
-  const Description = styled.Text`
-    font-size: 16;
-    color: ${colors.gray[7]};
-  `;
+  const Image = useConstant(
+    () => styled.Image`
+      height: 80;
+      width: 80;
+      background-color: #f3f3f3;
+    `,
+  );
+  const Info = useConstant(
+    () => styled.View`
+      display: flex;
+    `,
+  );
+  const Title = useConstant(
+    () => styled.Text`
+      font-size: 28;
+      font-weight: 800;
+      color: ${colors.gray[9]};
+    `,
+  );
+  const Address = useConstant(
+    () => styled.Text`
+      font-size: 15;
+      color: ${colors.gray[6]};
+    `,
+  );
+  const Description = useConstant(
+    () => styled.Text`
+      font-size: 16;
+      color: ${colors.gray[7]};
+    `,
+  );
 
   return (
     <Container onPress={onPress}>
