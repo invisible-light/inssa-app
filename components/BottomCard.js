@@ -6,6 +6,8 @@ import colors from '../utils/colors.json';
 import padStart from '../utils/padStart';
 import useConstant from '../utils/useConstant';
 
+import exampleImage from '../assets/examples/light.png';
+
 const window = Dimensions.get('window');
 
 function Header({onPress, closed}) {
@@ -15,6 +17,7 @@ function Header({onPress, closed}) {
     height: ${closed ? 80 : 95};
     justify-content: space-between;
     align-items: center;
+    padding-bottom: ${closed ? 18 : 0};
     ${!closed &&
       `padding-bottom: 15;
       border-bottom-width: 1px;
@@ -25,6 +28,7 @@ function Header({onPress, closed}) {
       height: 80;
       width: 80;
       background-color: #f3f3f3;
+      border-radius: 4;
     `,
   );
   const Info = useConstant(
@@ -54,7 +58,7 @@ function Header({onPress, closed}) {
 
   return (
     <Container onPress={onPress}>
-      <Image />
+      <Image source={exampleImage} defaultSource={exampleImage} />
       <Info>
         <Title>신호등</Title>
         <Address>경기도 안산시 단원구 와동 사세충열로 94</Address>
@@ -130,7 +134,7 @@ export default class Card extends React.Component {
       walk,
       redLight: 15,
       greenLight: 12,
-      closed: false,
+      closed: true,
     };
 
     this.resetTimer = this.resetTimer.bind(this);

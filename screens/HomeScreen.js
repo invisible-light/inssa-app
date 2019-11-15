@@ -26,6 +26,10 @@ const Container = styled.View`
 `;
 
 export default class HomeScreen extends Component {
+  static navigationOptions = {
+    header: null,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -65,8 +69,8 @@ export default class HomeScreen extends Component {
           style={styles.map}
           provider={PROVIDER_GOOGLE}
           initialRegion={{
-            latitude: 37.3395526,
-            longitude: 126.8293454,
+            latitude: 37.3400526,
+            longitude: 126.8294954,
             latitudeDelta: 0.005,
             longitudeDelta: 0.005,
           }}>
