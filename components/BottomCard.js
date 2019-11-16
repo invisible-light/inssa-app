@@ -38,20 +38,20 @@ function Header({onPress, closed}) {
   );
   const Title = useConstant(
     () => styled.Text`
-      font-size: 28;
+      font-size: 26;
       font-weight: 800;
       color: ${colors.gray[9]};
     `,
   );
   const Address = useConstant(
     () => styled.Text`
-      font-size: 15;
+      font-size: 13;
       color: ${colors.gray[6]};
     `,
   );
   const Description = useConstant(
     () => styled.Text`
-      font-size: 16;
+      font-size: 14;
       color: ${colors.gray[7]};
     `,
   );
