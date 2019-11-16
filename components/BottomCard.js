@@ -3,12 +3,12 @@ import {Dimensions} from 'react-native';
 import styled from 'styled-components';
 
 import colors from '../utils/colors.json';
-import padStart from '../utils/padStart';
+// import padStart from '../utils/padStart';
 import useConstant from '../utils/useConstant';
 
 import exampleImage from '../assets/examples/light.png';
 
-const window = Dimensions.get('window');
+// const window = Dimensions.get('window');
 
 function Header({onPress, closed}) {
   const Container = styled.TouchableOpacity`
@@ -84,45 +84,45 @@ const Container = styled.View`
   shadow-offset: 0px 5px;
 `;
 
-const Illust = styled.Image`
-  position: absolute;
-  bottom: 0;
-  left: -120;
-  height: 280;
-  width: 100%;
-  z-index: -1;
-`;
+// const Illust = styled.Image`
+//   position: absolute;
+//   bottom: 0;
+//   left: -120;
+//   height: 280;
+//   width: 100%;
+//   z-index: -1;
+// `;
 
-const Info = styled.View`
-  display: flex;
-  position: absolute;
-  bottom: 35%;
-  left: ${window.width / 2 - 44};
-`;
+// const Info = styled.View`
+//   display: flex;
+//   position: absolute;
+//   bottom: 35%;
+//   left: ${window.width / 2 - 44};
+// `;
 
-const State = styled.Text`
-  font-size: 16;
-  font-weight: 800;
-  color: ${colors.gray[6]};
-`;
+// const State = styled.Text`
+//   font-size: 16;
+//   font-weight: 800;
+//   color: ${colors.gray[6]};
+// `;
 
-const Field = styled.Text`
-  font-size: 20;
-  font-weight: 800;
-  color: ${colors.gray[8]};
-`;
+// const Field = styled.Text`
+//   font-size: 20;
+//   font-weight: 800;
+//   color: ${colors.gray[8]};
+// `;
 
-const Clock = styled.Text`
-  font-size: 70;
-  font-weight: 800;
-  line-height: 75;
-  color: ${colors.gray[8]};
-`;
+// const Clock = styled.Text`
+//   font-size: 70;
+//   font-weight: 800;
+//   line-height: 75;
+//   color: ${colors.gray[8]};
+// `;
 
-const secondsToClock = seconds => {
-  const offset = seconds % 3600;
-  return `${padStart(offset / 60, 2)}:${padStart(offset % 60, 2)}`;
-};
+// const secondsToClock = seconds => {
+//   const offset = seconds % 3600;
+//   return `${padStart(offset / 60, 2)}:${padStart(offset % 60, 2)}`;
+// };
 
 export default class Card extends React.Component {
   constructor(props) {
@@ -137,64 +137,65 @@ export default class Card extends React.Component {
       closed: true,
     };
 
-    this.resetTimer = this.resetTimer.bind(this);
-    this.onPressToggle = this.onPressToggle.bind(this);
+    // this.resetTimer = this.resetTimer.bind(this);
+    // this.onPressToggle = this.onPressToggle.bind(this);
   }
 
-  componentDidMount() {
-    this.interval = setInterval(
-      () =>
-        this.setState(prevState => ({
-          time: prevState.time - 1,
-        })),
-      1000,
-    );
-  }
+  // componentDidMount() {
+  //   this.interval = setInterval(
+  //     () =>
+  //       this.setState(prevState => ({
+  //         time: prevState.time - 1,
+  //       })),
+  //     1000,
+  //   );
+  // }
 
-  componentDidUpdate() {
-    const {time} = this.state;
-    if (time === 0) {
-      this.resetTimer();
-    }
-  }
+  // componentDidUpdate() {
+  //   const {time} = this.state;
+  //   if (time === 0) {
+  //     this.resetTimer();
+  //   }
+  // }
 
-  resetTimer() {
-    const {redLight, greenLight} = this.state;
+  // resetTimer() {
+  //   const {redLight, greenLight} = this.state;
 
-    this.setState(prevState => ({
-      walk: !prevState.walk,
-      time: prevState.walk ? redLight : greenLight,
-    }));
-  }
+  //   this.setState(prevState => ({
+  //     walk: !prevState.walk,
+  //     time: prevState.walk ? redLight : greenLight,
+  //   }));
+  // }
 
-  onPressToggle() {
-    this.setState(prevState => ({
-      closed: !prevState.closed,
-    }));
-  }
+  // onPressToggle() {
+  //   this.setState(prevState => ({
+  //     closed: !prevState.closed,
+  //   }));
+  // }
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
   render() {
-    const {time, walk, closed} = this.state;
-    const illustSource = walk
-      ? require('../assets/illusts/running.png')
-      : require('../assets/illusts/stopped.png');
-    const stateText = `지금은 ${walk ? '초록' : '빨간'} 불!`;
-    const fieldText = walk ? '보행할 수 있는 시간' : '보행 가능 시간까지';
+    // const {time, walk, closed} = this.state;
+    const {closed} = this.state;
+    // const illustSource = walk
+    //   ? require('../assets/illusts/running.png')
+    //   : require('../assets/illusts/stopped.png');
+    // const stateText = `지금은 ${walk ? '초록' : '빨간'} 불!`;
+    // const fieldText = walk ? '보행할 수 있는 시간' : '보행 가능 시간까지';
 
-    const Content = styled.View`
-      position: relative;
-      height: 295;
-      display: ${closed ? 'none' : 'flex'};
-    `;
+    // const Content = styled.View`
+    //   position: relative;
+    //   height: 295;
+    //   display: ${closed ? 'none' : 'flex'};
+    // `;
 
     return (
       <Container>
         <Header onPress={this.onPressToggle} closed={closed} />
-        <Content>
+        {/* <Content>
           <Illust
             resizeMode={'contain'}
             source={illustSource}
@@ -205,7 +206,7 @@ export default class Card extends React.Component {
             <Field>{fieldText}</Field>
             <Clock>{secondsToClock(time)}</Clock>
           </Info>
-        </Content>
+        </Content> */}
       </Container>
     );
   }
