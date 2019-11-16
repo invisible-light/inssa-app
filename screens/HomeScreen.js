@@ -141,9 +141,17 @@ export default class HomeScreen extends Component {
             });
 
             // console.debug('주위에 신호등이 있습니다.', distance);
+            // 아두이노에서 Firebase.setBool 으로 빨/초 값 설정하면 그거 키에 접근~ 어쩌고
+            // 여기서 Firebase에서 최근 신호등 상태 가져와야 함.
+
             Alert.alert('주위에 신호등이 있습니다.', uuid);
+            // 여기서 Alert()를 없애고, 신호등 상태 업데이트 해야 함.
+            // 신호등 상태 업데이트 한 거는 렌더링 따로 해줘야 하는데 이건 좀만 이따가 생각해 보자
+            // 아 텐션 떨어졌다 어카지
+
             Tts.stop();
             Tts.speak('주위에 신호등이 있습니다.');
+            // 신호등 상태 넣어서 안내음성 수정해야 함
           }
         }
       } else {

@@ -13,6 +13,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-native-fontawesome": "^0.1.0",
+    "@react-native-firebase/app": "^6.0.3",
     "react": "16.9.0",
     "react-native": "0.61.4",
     "react-native-beacons-manager": "git://github.com/MacKentoch/react-native-beacons-manager.git#53c1bda",

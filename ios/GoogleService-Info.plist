@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>727276532449-im3s066smp1gbd7m2u1rc8uigpquev6b.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.727276532449-im3s066smp1gbd7m2u1rc8uigpquev6b</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAmVDoem0nWXG8IXF4t5KB8zv7LbZzDpWI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>727276532449</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.inssa</string>
+	<key>PROJECT_ID</key>
+	<string>inssa-63dee</string>
+	<key>STORAGE_BUCKET</key>
+	<string>inssa-63dee.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:727276532449:ios:87436e0a9ca3651d4a7da0</string>
+	<key>DATABASE_URL</key>
+	<string>https://inssa-63dee.firebaseio.com</string>
+</dict>
+</plist>
