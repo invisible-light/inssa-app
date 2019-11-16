@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import {Alert, StyleSheet} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import styled from 'styled-components/native';
-
 import Beacons from 'react-native-beacons-manager';
 
 import BottomCard from '../components/BottomCard';
 import CustomMarker from '../components/CustomMarker';
+
+import isNotEmptyArray from '../utils/isNotEmptyArray';
 
 const styles = StyleSheet.create({
   map: {
@@ -117,12 +118,13 @@ export default class HomeScreen extends Component {
       const {beaconNearby, beaconCount} = this.state;
 
       const {beacons} = data;
-      if (!beacons) {
+      if (!isNotEmptyArray(beacons)) {
         return;
       }
 
       const {distance, uuid} = beacons[0];
 
+      console.log(distance);
       if (distance > 0 && distance <= 1.7) {
         // 비컨 사정거리 안에 있다면
         if (!beaconNearby) {
