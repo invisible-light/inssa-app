@@ -662,6 +662,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@cs125/wait-until@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@cs125/wait-until/-/wait-until-0.0.3.tgz#957fc279121704845300dac47ee37a3b34c203d2"
+  integrity sha512-Z3+GXZbAjiiI0cJi1si+WfBBPfmLwZ9Tk4wqyFJGeZHJilyveBCpSktHdJlmqjHBBvrMi8ymXefYi2S833LhRA==
+
 "@emotion/is-prop-valid@^0.8.1":
   version "0.8.5"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.5.tgz#2dda0791f0eafa12b7a0a5b39858405cc7bde983"
@@ -5491,6 +5496,17 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is
   version "16.11.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.11.0.tgz#b85dfecd48ad1ce469ff558a882ca8e8313928fa"
   integrity sha512-gbBVYR2p8mnriqAwWx9LbuUrShnAuSCNnuPGyc7GJrMVQtPDAh8iLpv7FRuMPFb56KkaVZIYSz1PrjI9q0QPCw==
+
+"react-native-beacons-manager@git://github.com/MacKentoch/react-native-beacons-manager.git#53c1bda":
+  version "1.1.0"
+  resolved "git://github.com/MacKentoch/react-native-beacons-manager.git#53c1bda81f032e775f29327a7bab28a14528cf39"
+
+react-native-bluetooth-status@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-bluetooth-status/-/react-native-bluetooth-status-1.3.0.tgz#45c6b8eddec2ee54e9abefa44ca16014e5ae1f6b"
+  integrity sha512-GZ/T61RGYabaSGbfwyyKCiTvaDGSQMQY8XcPpEnU8/5KMLDd+PFSQtbFy2V+XoGFcQ+2rrPA864SkooVKf83Ew==
+  dependencies:
+    "@cs125/wait-until" "^0.0.3"
 
 react-native-gesture-handler@^1.5.0:
   version "1.5.0"
