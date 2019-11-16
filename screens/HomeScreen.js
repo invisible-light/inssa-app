@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert, StyleSheet, Vibration} from 'react-native';
+import {Alert, StyleSheet} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import styled from 'styled-components/native';
 import Beacons from 'react-native-beacons-manager';
@@ -141,7 +141,6 @@ export default class HomeScreen extends Component {
             });
 
             // console.debug('주위에 신호등이 있습니다.', distance);
-            Vibration.vibrate(5000);
             Alert.alert('주위에 신호등이 있습니다.', uuid);
             Tts.stop();
             Tts.speak('주위에 신호등이 있습니다.');
