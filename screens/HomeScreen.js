@@ -85,9 +85,9 @@ export default class HomeScreen extends Component {
       ],
       beaconNearby: false,
       beaconCount: 0,
-      timestamp: 0,
+      // timestamp: 0,
     };
-    this.onUpdateWalkState = this.onUpdateWalkState.bind(this);
+    this.onClickUpdateWalkState = this.onClickUpdateWalkState.bind(this);
     this.onRegionDidRange = this.onRegionDidRange.bind(this);
   }
 
@@ -111,9 +111,6 @@ export default class HomeScreen extends Component {
       this.onRegionDidRange,
     );
 
-    // database()
-    //   .ref('/walk/')
-    //   .on('value', this.onUpdateWalkState);
     Tts.addEventListener('tts-start', event =>
       console.debug('tts start', event),
     );
@@ -130,8 +127,17 @@ export default class HomeScreen extends Component {
     this.beaconsDidRangeEvent = null;
   }
 
-  onUpdateWalkState(snapshot) {
-    Alert.alert('값 변경됨', snapshot);
+  onClickUpdateWalkState() {
+    database()
+      .ref('/walk/')
+      .once('value', snapshot => {
+        const message = `신호등이 ${
+          snapshot.val() ? '초록' : '빨간'
+        } 색이 되었습니다.`;
+        Tts.stop();
+        Tts.speak(message);
+        return;
+      });
   }
 
   async onRegionDidRange(data) {
@@ -170,7 +176,7 @@ export default class HomeScreen extends Component {
                 } 불인 신호등이 있습니다.`;
                 Tts.stop();
                 Tts.speak(message);
-                Alert.alert('연결됨', message);
+                // Alert.alert('연결됨', message);
                 // 신호등 상태 넣은 안내음성
                 return;
               });
@@ -209,7 +215,7 @@ export default class HomeScreen extends Component {
             </Marker>
           ))}
         </MapView>
-        <BottomCard />
+        <BottomCard onPress={this.onClickUpdateWalkState} />
       </Container>
     );
   }

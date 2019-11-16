@@ -179,6 +179,7 @@ export default class Card extends React.Component {
 
   render() {
     // const {time, walk, closed} = this.state;
+    const {onPress} = this.props;
     const {closed} = this.state;
     // const illustSource = walk
     //   ? require('../assets/illusts/running.png')
@@ -194,7 +195,7 @@ export default class Card extends React.Component {
 
     return (
       <Container>
-        <Header onPress={this.onPressToggle} closed={closed} />
+        <Header onPress={onPress} closed={closed} />
         {/* <Content>
           <Illust
             resizeMode={'contain'}
