@@ -6,11 +6,12 @@ import colors from '../utils/colors.json';
 // import padStart from '../utils/padStart';
 import useConstant from '../utils/useConstant';
 
-import exampleImage from '../assets/examples/light.png';
+import exampleRedImage from '../assets/examples/red.png';
+import exampleGreenImage from '../assets/examples/green.png';
 
 // const window = Dimensions.get('window');
 
-function Header({onPress, closed}) {
+function Header({onPress, closed, walkable}) {
   const Container = styled.TouchableOpacity`
     display: flex;
     flex-direction: row;
@@ -36,6 +37,14 @@ function Header({onPress, closed}) {
       display: flex;
     `,
   );
+  const Head = useConstant(
+    () => styled.View`
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      margin-bottom: 2;
+    `,
+  );
   const Title = useConstant(
     () => styled.Text`
       font-size: 26;
@@ -56,11 +65,24 @@ function Header({onPress, closed}) {
     `,
   );
 
+  const State = styled.Text`
+    font-size: 15;
+    font-weight: 700;
+    margin-left: 5;
+    margin-bottom: 1;
+    color: ${walkable ? '#099268' : '#f03e3e'};
+  `;
+
+  const exampleImage = walkable ? exampleGreenImage : exampleRedImage;
+
   return (
     <Container onPress={onPress}>
       <Image source={exampleImage} defaultSource={exampleImage} />
       <Info>
-        <Title>신호등</Title>
+        <Head>
+          <Title>신호등</Title>
+          <State>{walkable ? '초록불' : '빨간불'}</State>
+        </Head>
         <Address>경기도 안산시 단원구 와동 사세충열로 94</Address>
         <Description>한국디지털미디어고등학교 앞 신호등입니다.</Description>
       </Info>
@@ -163,7 +185,8 @@ export default class Card extends React.Component {
 
   render() {
     // const {time, walk, closed} = this.state;
-    const {hide, onPress} = this.props;
+    const {hide, onPress, walkable} = this.props;
+    console.log('walkable?', walkable);
     const {closed} = this.state;
     // const illustSource = walk
     //   ? require('../assets/illusts/running.png')
@@ -196,7 +219,7 @@ export default class Card extends React.Component {
 
     return (
       <Container>
-        <Header onPress={onPress} closed={closed} />
+        <Header onPress={onPress} closed={closed} walkable={walkable} />
         {/* <Content>
           <Illust
             resizeMode={'contain'}

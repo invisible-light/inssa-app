@@ -140,6 +140,7 @@ export default class HomeScreen extends Component {
         const message = `신호등이 ${walk ? '초록' : '빨간'} 색이 되었습니다.`;
         Tts.stop();
         Tts.speak(message);
+        console.log(this.state);
         return;
       });
   }
@@ -206,7 +207,8 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    const {beaconNearby} = this.state;
+    const {beaconNearby, walkable} = this.state;
+    console.log('walkable?', walkable);
     return (
       <Container>
         <MapView
@@ -225,7 +227,8 @@ export default class HomeScreen extends Component {
           ))}
         </MapView>
         <BottomCard
-          hide={!beaconNearby}
+          hide={beaconNearby}
+          walkable={walkable}
           onPress={this.onClickUpdateWalkState}
         />
       </Container>
