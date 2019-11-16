@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+// eslint-disable-next-line no-unused-vars
 import {Alert, StyleSheet} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import styled from 'styled-components/native';
@@ -86,6 +87,7 @@ export default class HomeScreen extends Component {
       beaconNearby: false,
       beaconCount: 0,
       // timestamp: 0,
+      walkable: false,
     };
     this.onClickUpdateWalkState = this.onClickUpdateWalkState.bind(this);
     this.onRegionDidRange = this.onRegionDidRange.bind(this);
@@ -131,9 +133,11 @@ export default class HomeScreen extends Component {
     database()
       .ref('/walk/')
       .once('value', snapshot => {
-        const message = `신호등이 ${
-          snapshot.val() ? '초록' : '빨간'
-        } 색이 되었습니다.`;
+        const walk = snapshot.val();
+        this.setState({
+          walkable: walk,
+        });
+        const message = `신호등이 ${walk ? '초록' : '빨간'} 색이 되었습니다.`;
         Tts.stop();
         Tts.speak(message);
         return;
@@ -171,6 +175,10 @@ export default class HomeScreen extends Component {
             database()
               .ref('/walk/')
               .once('value', snapshot => {
+                const walk = snapshot.val();
+                this.setState({
+                  walkable: walk,
+                });
                 const message = `주위에 ${
                   snapshot.val() ? '초록' : '빨간'
                 } 불인 신호등이 있습니다.`;
@@ -198,6 +206,7 @@ export default class HomeScreen extends Component {
   }
 
   render() {
+    const {beaconNearby} = this.state;
     return (
       <Container>
         <MapView
@@ -215,7 +224,10 @@ export default class HomeScreen extends Component {
             </Marker>
           ))}
         </MapView>
-        <BottomCard onPress={this.onClickUpdateWalkState} />
+        <BottomCard
+          hide={!beaconNearby}
+          onPress={this.onClickUpdateWalkState}
+        />
       </Container>
     );
   }

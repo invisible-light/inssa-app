@@ -68,22 +68,6 @@ function Header({onPress, closed}) {
   );
 }
 
-const Container = styled.View`
-  position: absolute;
-  bottom: 0;
-  background-color: white;
-  width: 100%;
-  padding: 0 22px;
-  padding-top: 25;
-  padding-bottom: 20;
-  border-top-left-radius: 12;
-  border-top-right-radius: 12;
-  shadow-opacity: 0.2;
-  shadow-radius: 16px;
-  shadow-color: black;
-  shadow-offset: 0px 5px;
-`;
-
 // const Illust = styled.Image`
 //   position: absolute;
 //   bottom: 0;
@@ -179,7 +163,7 @@ export default class Card extends React.Component {
 
   render() {
     // const {time, walk, closed} = this.state;
-    const {onPress} = this.props;
+    const {hide, onPress} = this.props;
     const {closed} = this.state;
     // const illustSource = walk
     //   ? require('../assets/illusts/running.png')
@@ -192,6 +176,23 @@ export default class Card extends React.Component {
     //   height: 295;
     //   display: ${closed ? 'none' : 'flex'};
     // `;
+
+    const Container = styled.View`
+      position: absolute;
+      bottom: 0;
+      background-color: white;
+      width: 100%;
+      padding: 0 22px;
+      padding-top: 25;
+      padding-bottom: 20;
+      border-top-left-radius: 12;
+      border-top-right-radius: 12;
+      shadow-opacity: 0.2;
+      shadow-radius: 16px;
+      shadow-color: black;
+      shadow-offset: 0px 5px;
+      display: ${hide ? 'none' : 'flex'};
+    `;
 
     return (
       <Container>
