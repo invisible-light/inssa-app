@@ -4,6 +4,7 @@ import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import styled from 'styled-components/native';
 import Beacons from 'react-native-beacons-manager';
 import Tts from 'react-native-tts';
+import database from '@react-native-firebase/database';
 
 import BottomCard from '../components/BottomCard';
 import CustomMarker from '../components/CustomMarker';
@@ -94,7 +95,18 @@ export default class HomeScreen extends Component {
     Beacons.startMonitoringForRegion(beaconRegions[0]);
     Beacons.startRangingBeaconsInRegion(beaconRegions[0]);
     Beacons.startUpdatingLocation();
-    console.debug(true);
+
+    database()
+      .ref('/walk/')
+      .once('value', snapshot => {
+        Alert.alert(
+          '주위에 신호등이 있습니다.',
+          JSON.stringify(snapshot.val()),
+        );
+        return;
+      });
+
+    // console.log('User data: ', snapshot.val());
   }
 
   componentDidMount() {
@@ -116,7 +128,7 @@ export default class HomeScreen extends Component {
     this.beaconsDidRangeEvent = null;
   }
 
-  onRegionDidRange(data) {
+  async onRegionDidRange(data) {
     try {
       const {beaconNearby, beaconCount} = this.state;
 
@@ -143,8 +155,12 @@ export default class HomeScreen extends Component {
             // console.debug('주위에 신호등이 있습니다.', distance);
             // 아두이노에서 Firebase.setBool 으로 빨/초 값 설정하면 그거 키에 접근~ 어쩌고
             // 여기서 Firebase에서 최근 신호등 상태 가져와야 함.
+            const ref = database().ref('/walk');
+            const snapshot = await ref.once();
 
-            Alert.alert('주위에 신호등이 있습니다.', uuid);
+            // console.log('User data: ', snapshot.val());
+
+            Alert.alert('주위에 신호등이 있습니다.', snapshot.val());
             // 여기서 Alert()를 없애고, 신호등 상태 업데이트 해야 함.
             // 신호등 상태 업데이트 한 거는 렌더링 따로 해줘야 하는데 이건 좀만 이따가 생각해 보자
             // 아 텐션 떨어졌다 어카지
