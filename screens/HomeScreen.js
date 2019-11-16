@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
-import {Alert, StyleSheet} from 'react-native';
+import {Alert, StyleSheet, Vibration} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import styled from 'styled-components/native';
 import Beacons from 'react-native-beacons-manager';
+import Tts from 'react-native-tts';
 
 import BottomCard from '../components/BottomCard';
 import CustomMarker from '../components/CustomMarker';
 
 import isNotEmptyArray from '../utils/isNotEmptyArray';
+
+Tts.setDefaultVoice('com.apple.ttsbundle.Yuna-compact');
 
 const styles = StyleSheet.create({
   map: {
@@ -137,8 +140,11 @@ export default class HomeScreen extends Component {
               beaconNearby: true,
             });
 
-            console.debug('주위에 신호등이 있습니다.', distance);
+            // console.debug('주위에 신호등이 있습니다.', distance);
+            Vibration.vibrate(5000);
             Alert.alert('주위에 신호등이 있습니다.', uuid);
+            Tts.stop();
+            Tts.speak('주위에 신호등이 있습니다.');
           }
         }
       } else {

@@ -248,6 +248,8 @@ PODS:
     - React
   - RNSVG (9.13.3):
     - React
+  - TextToSpeech (2.0.0):
+    - React
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -285,6 +287,7 @@ DEPENDENCIES:
   - ReactNativeBeaconsManager (from `../node_modules/react-native-beacons-manager`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - TextToSpeech (from `../node_modules/react-native-tts`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -352,6 +355,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  TextToSpeech:
+    :path: "../node_modules/react-native-tts"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -388,6 +393,7 @@ SPEC CHECKSUMS:
   ReactNativeBeaconsManager: dd0b01841445881989af5be9ab83153d1cdaa6b7
   RNGestureHandler: a4ddde1ffc6e590c8127b8b7eabfdade45475c74
   RNSVG: f6177f8d7c095fada7cfee2e4bb7388ba426064c
+  TextToSpeech: 4e2fc50c7495416c6da5a1662ad3f750c58d3c85
   Yoga: ba3d99dbee6c15ea6bbe3783d1f0cb1ffb79af0f
 
 PODFILE CHECKSUM: 6df1254c091b8f5d5eed898f9cb7dd873ff4a7c8
