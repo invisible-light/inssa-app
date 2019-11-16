@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
+import {Alert, StyleSheet} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import styled from 'styled-components/native';
 import Beacons from 'react-native-beacons-manager';
@@ -87,6 +87,7 @@ export default class HomeScreen extends Component {
       beaconCount: 0,
       timestamp: 0,
     };
+    this.onUpdateWalkState = this.onUpdateWalkState.bind(this);
     this.onRegionDidRange = this.onRegionDidRange.bind(this);
   }
 
@@ -109,11 +110,28 @@ export default class HomeScreen extends Component {
       'beaconsDidRange',
       this.onRegionDidRange,
     );
+
+    // database()
+    //   .ref('/walk/')
+    //   .on('value', this.onUpdateWalkState);
+    Tts.addEventListener('tts-start', event =>
+      console.debug('tts start', event),
+    );
+    Tts.addEventListener('tts-finish', event =>
+      console.debug('tts finish', event),
+    );
+    Tts.addEventListener('tts-cancel', event =>
+      console.debug('tts cancel', event),
+    );
   }
 
   componentWillUnMount() {
     this.regionDidEnterEvent = null;
     this.beaconsDidRangeEvent = null;
+  }
+
+  onUpdateWalkState(snapshot) {
+    Alert.alert('값 변경됨', snapshot);
   }
 
   async onRegionDidRange(data) {
@@ -141,18 +159,18 @@ export default class HomeScreen extends Component {
               beaconNearby: true,
             });
 
-            // console.debug('주위에 신호등이 있습니다.', distance);
+            console.debug('주위에 신호등이 있습니다.', distance);
             // 아두이노에서 Firebase.setBool 으로 빨/초 값 설정하면 그거 키에 접근~ 어쩌고
             // 여기서 Firebase에서 최근 신호등 상태 가져와야 함.
             database()
               .ref('/walk/')
               .once('value', snapshot => {
+                const message = `주위에 ${
+                  snapshot.val() ? '초록' : '빨간'
+                } 불인 신호등이 있습니다.`;
                 Tts.stop();
-                Tts.speak(
-                  `주위에 ${
-                    snapshot.val() ? '초록' : '빨간'
-                  } 불인 신호등이 있습니다.`,
-                );
+                Tts.speak(message);
+                Alert.alert('연결됨', message);
                 // 신호등 상태 넣은 안내음성
                 return;
               });
