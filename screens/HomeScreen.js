@@ -33,6 +33,17 @@ const Container = styled.View`
   bottom: 0;
 `;
 
+const Wrap = styled.TouchableOpacity`
+  flex: 1;
+  position: absolute;
+  height: 50%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+`;
+
 const beaconRegions = [
   {
     identifier: 'light-1',
@@ -89,6 +100,7 @@ export default class HomeScreen extends Component {
       // timestamp: 0,
       walkable: false,
     };
+    this.onClickUpdateDidRange = this.onClickUpdateDidRange.bind(this);
     this.onClickUpdateWalkState = this.onClickUpdateWalkState.bind(this);
     this.onRegionDidRange = this.onRegionDidRange.bind(this);
   }
@@ -108,10 +120,10 @@ export default class HomeScreen extends Component {
       },
     );
 
-    this.beaconsDidRangeEvent = Beacons.BeaconsEventEmitter.addListener(
-      'beaconsDidRange',
-      this.onRegionDidRange,
-    );
+    // this.beaconsDidRangeEvent = Beacons.BeaconsEventEmitter.addListener(
+    //   'beaconsDidRange',
+    //   this.onRegionDidRange,
+    // );
 
     Tts.addEventListener('tts-start', event =>
       console.debug('tts start', event),
@@ -127,6 +139,26 @@ export default class HomeScreen extends Component {
   componentWillUnMount() {
     this.regionDidEnterEvent = null;
     this.beaconsDidRangeEvent = null;
+  }
+
+  onClickUpdateDidRange() {
+    database()
+      .ref('/walk/')
+      .once('value', snapshot => {
+        const walk = snapshot.val();
+        this.setState({
+          walkable: walk,
+          beaconNearby: true,
+        });
+        const message = `주위에 ${
+          snapshot.val() ? '초록' : '빨간'
+        } 불인 신호등이 있습니다.`;
+        Tts.stop();
+        Tts.speak(message);
+        // Alert.alert('비컨 연결됨', message);
+        // 신호등 상태 넣은 안내음성
+        return;
+      });
   }
 
   onClickUpdateWalkState() {
@@ -152,7 +184,8 @@ export default class HomeScreen extends Component {
     Tts.speak(message);
   }
 
-  async onRegionDidRange(data) {
+  onRegionDidRange(data) {
+    console.log(data);
     try {
       const {beaconNearby, beaconCount} = this.state;
 
@@ -192,7 +225,7 @@ export default class HomeScreen extends Component {
                 } 불인 신호등이 있습니다.`;
                 Tts.stop();
                 Tts.speak(message);
-                // Alert.alert('연결됨', message);
+                // Alert.alert('비컨 연결됨', message);
                 // 신호등 상태 넣은 안내음성
                 return;
               });
@@ -209,13 +242,13 @@ export default class HomeScreen extends Component {
         });
       }
     } catch (error) {
-      console.debug(error, data);
+      console.debug('err', error, data);
     }
   }
 
   render() {
     const {beaconNearby, walkable} = this.state;
-    console.log('walkable?', walkable);
+    // console.log('walkable?', walkable);
     return (
       <Container>
         <MapView
@@ -233,8 +266,9 @@ export default class HomeScreen extends Component {
             </Marker>
           ))}
         </MapView>
+        <Wrap onPress={this.onClickUpdateDidRange} />
         <BottomCard
-          hide={beaconNearby}
+          hide={!beaconNearby}
           walkable={walkable}
           onPress={this.onClickUpdateWalkState}
         />

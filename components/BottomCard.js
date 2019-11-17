@@ -186,7 +186,7 @@ export default class Card extends React.Component {
   render() {
     // const {time, walk, closed} = this.state;
     const {hide, onPress, walkable} = this.props;
-    console.log('walkable?', walkable);
+    // console.log('walkable?', walkable);
     const {closed} = this.state;
     // const illustSource = walk
     //   ? require('../assets/illusts/running.png')
