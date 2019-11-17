@@ -130,19 +130,26 @@ export default class HomeScreen extends Component {
   }
 
   onClickUpdateWalkState() {
-    database()
-      .ref('/walk/')
-      .once('value', snapshot => {
-        const walk = snapshot.val();
-        this.setState({
-          walkable: walk,
-        });
-        const message = `신호등이 ${walk ? '초록' : '빨간'} 색이 되었습니다.`;
-        Tts.stop();
-        Tts.speak(message);
-        console.log(this.state);
-        return;
-      });
+    // database()
+    //   .ref('/walk/')
+    //   .once('value', snapshot => {
+    //     const walk = snapshot.val();
+    //     this.setState({
+    //       walkable: walk,
+    //     });
+    //     const message = `신호등이 ${walk ? '초록' : '빨간'} 색이 되었습니다.`;
+    //     Tts.stop();
+    //     Tts.speak(message);
+    //     console.log(this.state);
+    //     return;
+    //   });
+    this.setState(prevState => ({
+      walkable: !prevState.walkable,
+    }));
+    const {walkable: walk} = this.state;
+    const message = `신호등이 ${!walk ? '초록' : '빨간'} 색이 되었습니다.`;
+    Tts.stop();
+    Tts.speak(message);
   }
 
   async onRegionDidRange(data) {
@@ -171,7 +178,7 @@ export default class HomeScreen extends Component {
             });
 
             console.debug('주위에 신호등이 있습니다.', distance);
-            // 아두이노에서 Firebase.setBool 으로 빨/초 값 설정하면 그거 키에 접근~ 어쩌고
+            // 아두이노에서  Firebase.setBool 으로 빨/초 값 설정하면 그거 키에 접근~ 어쩌고
             // 여기서 Firebase에서 최근 신호등 상태 가져와야 함.
             database()
               .ref('/walk/')
