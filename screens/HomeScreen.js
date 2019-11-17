@@ -33,13 +33,23 @@ const Container = styled.View`
   bottom: 0;
 `;
 
-const Wrap = styled.TouchableOpacity`
+const FirstButton = styled.TouchableOpacity`
   flex: 1;
   position: absolute;
-  height: 100;
-  width: 120;
+  height: 200;
+  width: 200;
   top: 0;
   left: 0;
+  background-color: transparent;
+`;
+
+const SecondButton = styled.TouchableOpacity`
+  flex: 1;
+  position: absolute;
+  height: 200;
+  width: 200;
+  top: 0;
+  right: 0;
   background-color: transparent;
 `;
 
@@ -265,12 +275,9 @@ export default class HomeScreen extends Component {
             </Marker>
           ))}
         </MapView>
-        <Wrap onPress={this.onClickUpdateDidRange} />
-        <BottomCard
-          hide={!beaconNearby}
-          walkable={walkable}
-          onPress={this.onClickUpdateWalkState}
-        />
+        <FirstButton onPress={this.onClickUpdateDidRange} />
+        <SecondButton onPress={this.onClickUpdateWalkState} />
+        <BottomCard hide={!beaconNearby} walkable={walkable} />
       </Container>
     );
   }
