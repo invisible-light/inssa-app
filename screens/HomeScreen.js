@@ -36,11 +36,10 @@ const Container = styled.View`
 const Wrap = styled.TouchableOpacity`
   flex: 1;
   position: absolute;
-  height: 50%;
-  width: 100%;
+  height: 100;
+  width: 120;
   top: 0;
   left: 0;
-  right: 0;
   background-color: transparent;
 `;
 
